@@ -1,0 +1,29 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/quintet_bg.qm</file>
+        <file alias="ca">locale/quintet_ca.qm</file>
+        <file alias="cs">locale/quintet_cs.qm</file>
+        <file alias="da">locale/quintet_da.qm</file>
+        <file alias="de">locale/quintet_de.qm</file>
+        <file alias="en">locale/quintet_en.qm</file>
+        <file alias="en_US">locale/quintet_en_US.qm</file>
+        <file alias="es">locale/quintet_es.qm</file>
+        <file alias="fi">locale/quintet_fi.qm</file>
+        <file alias="fr_FR">locale/quintet_fr_FR.qm</file>
+        <file alias="it">locale/quintet_it.qm</file>
+        <file alias="ja">locale/quintet_ja.qm</file>
+        <file alias="ko_KR">locale/quintet_ko_KR.qm</file>
+        <file alias="nl">locale/quintet_nl.qm</file>
+        <file alias="pl">locale/quintet_pl.qm</file>
+        <file alias="pt">locale/quintet_pt.qm</file>
+        <file alias="pt_BR">locale/quintet_pt_BR.qm</file>
+        <file alias="ro_RO">locale/quintet_ro_RO.qm</file>
+        <file alias="ru">locale/quintet_ru.qm</file>
+        <file alias="sk">locale/quintet_sk.qm</file>
+        <file alias="sv">locale/quintet_sv.qm</file>
+        <file alias="tr">locale/quintet_tr.qm</file>
+        <file alias="uk">locale/quintet_uk.qm</file>
+        <file alias="zh_CN">locale/quintet_zh_CN.qm</file>
+        <file alias="zh_TW">locale/quintet_zh_TW.qm</file>
+    </qresource>
+</RCC>

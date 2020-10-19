@@ -1,0 +1,26 @@
+# /etc/conf.d/quintetd: config file for /etc/init.d/quintetd
+
+# Config file location
+#QTCOIND_CONFIGFILE="/etc/quintet/quintet.conf"
+
+# What directory to write pidfile to?  (created and owned by $QTCOIND_USER)
+#QTCOIND_PIDDIR="/var/run/quintetd"
+
+# What filename to give the pidfile
+#QTCOIND_PIDFILE="${QTCOIND_PIDDIR}/quintetd.pid"
+
+# Where to write quintetd data (be mindful that the blockchain is large)
+#QTCOIND_DATADIR="/var/lib/quintetd"
+
+# User and group to own quintetd process
+#QTCOIND_USER="quintet"
+#QTCOIND_GROUP="quintet"
+
+# Path to quintetd executable
+#QTCOIND_BIN="/usr/bin/quintetd"
+
+# Nice value to run quintetd under
+#QTCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+QTCOIND_OPTS=""

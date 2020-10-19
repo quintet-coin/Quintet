@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=QuinTet
+Comment=QuinTet P2P Cryptocurrency
+Exec=quintet-qt %u
+Terminal=false
+Type=Application
+Icon=quintet128
+MimeType=x-scheme-handler/quintet;
+Categories=Office;Finance;
+Name[en_US]=quintet-qt.desktop

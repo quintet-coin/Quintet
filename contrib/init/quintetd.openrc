@@ -1,0 +1,86 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout
+#
+if [ -d "/var/lib/quintet/.quintet" ]; then
+	QTCOIND_DEFAULT_DATADIR="/var/lib/quintet/.quintet"
+else
+	QTCOIND_DEFAULT_DATADIR="/var/lib/quintetd"
+fi
+
+QTCOIND_CONFIGFILE=${QTCOIND_CONFIGFILE:-/etc/quintet/quintet.conf}
+QTCOIND_PIDDIR=${QTCOIND_PIDDIR:-/var/run/quintetd}
+QTCOIND_PIDFILE=${QTCOIND_PIDFILE:-${QTCOIND_PIDDIR}/quintetd.pid}
+QTCOIND_DATADIR=${QTCOIND_DATADIR:-${QTCOIND_DEFAULT_DATADIR}}
+QTCOIND_USER=${QTCOIND_USER:-quintet}
+QTCOIND_GROUP=${QTCOIND_GROUP:-quintet}
+QTCOIND_BIN=${QTCOIND_BIN:-/usr/bin/quintetd}
+
+name="QuinTet Core Daemon"
+description="QuinTet crypto-currency p2p network daemon"
+
+command="/usr/bin/quintetd"
+command_args="-pid=\"${QTCOIND_PIDFILE}\" \
+		-conf=\"${QTCOIND_CONFIGFILE}\" \
+		-datadir=\"${QTCOIND_DATADIR}\" \
+		-daemon \
+		${QTCOIND_OPTS}"
+
+required_files="${QTCOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${QTCOIND_USER} \
+			-N ${QTCOIND_NICE:-0} -w 2000"
+pidfile="${QTCOIND_PIDFILE}"
+retry=60
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${QTCOIND_USER}:${QTCOIND_GROUP}" \
+	"${QTCOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${QTCOIND_USER}:${QTCOIND_GROUP}" \
+	"${QTCOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${QTCOIND_USER}:${QTCOIND_GROUP} \
+	-m 0660 \
+	${QTCOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${QTCOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run quintetd."
+		eerror "The setting must appear in ${QTCOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"QuinTet Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}
