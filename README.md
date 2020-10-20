@@ -11,7 +11,6 @@ QuinTet (QTC) is a sustainable cryptocurrency modeled after Satoshi Nakamoto’s
 
 More information at [quintet.ai](https://quintet.ai/)
 
-Please reach out at info@qtc.org
 
 ### Coin Specs
 | Block Time                  | 60 Seconds      |
